@@ -249,6 +249,24 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .p .wk{color:#0a6f9c;}
 .p .wk.a{color:#b4407c;} .p .wk.s{color:#8a6608;}
 .p .wnote{color:rgba(22,19,26,.42);}
+/* シリーズ見出し（作品名が主、シーズンは従） */
+.ser{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  margin:20px 0 4px;padding-bottom:5px;border-bottom:1.5px solid rgba(22,19,26,.45);}
+.ser:first-of-type{margin-top:8px;}
+.ser b{font-size:14.5px;font-weight:900;letter-spacing:-.01em;}
+.ser span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--paper-ink);}
+.ser .start{margin:0 0 0 auto;}
+.p.srow{border-bottom:1px dotted rgba(22,19,26,.16);padding-top:5px;padding-bottom:5px;}
+.p.srow:last-child{border-bottom:0;}
+.p .sn2{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--red);letter-spacing:0;}
+.p.srow .wt{font-size:11.5px;line-height:1.65;color:rgba(22,19,26,.74);}
+.p.srow .wt::before{content:"▸ ";color:var(--red);}
+.p.srow input:checked ~ .wt::before{color:rgba(22,19,26,.3);}
+
+.when{display:block;margin-top:3px;font-family:var(--mono);font-size:9.5px;
+  line-height:1.7;letter-spacing:.03em;color:rgba(22,19,26,.55);}
+.when::before{content:"▸ ";color:var(--red);}
+.v-ink .when{color:rgba(255,255,255,.4);}
 .p:hover .wt{color:#000;}
 .p:focus-within{outline:2px solid var(--red);outline-offset:3px;}
 .p .slot{width:20px;height:20px;border:1px dashed rgba(22,19,26,.22);font-size:11px;right:0;}
@@ -610,22 +628,58 @@ const BACK=[
   ["マン・シング","2005","film"],["ゴーストライダー","2007","film"],
   ["パニッシャー：ウォー・ゾーン","2008","film"],["ゴーストライダー2","2012","film"]]}]},
 {no:"08",span:3,variant:"v-bare",title:"マーベル・テレビジョン系",
- cap:"ABC・Huluなどの旧ドラマ。『エージェント・オブ・シールド』は映画の出来事と直接つながります。",
- groups:[{name:"",items:[
-  ["エージェント・オブ・シールド","2013","tv","","全7シーズン",0,1],
-  ["エージェント・カーター","2015","tv","","全2シーズン"],
-  ["インヒューマンズ","2017","tv"],["ランナウェイズ","2017","tv","","全3シーズン"],
-  ["クローク&ダガー","2018","tv","","全2シーズン"],["ヘルストロム","2020","tv"]]}]},
+ cap:"ABC・Huluなどの旧ドラマ。▸ は本編のどこで観るかの目安です。『エージェント・オブ・シールド』は映画をシーズンの途中に挟む作りなので、話数まで書いています。",
+ groups:[
+  {name:"エージェント・オブ・シールド",series:true,meta:"全7シーズン・2013–2020",start:true,items:[
+   ["S1","2013","tv","","",0,0,
+    "『アベンジャーズ』の後。第16話と第17話の間に『ウィンター・ソルジャー』を挟む"],
+   ["S2","2014","tv","","",0,0,
+    "第19話と第20話の間に『エイジ・オブ・ウルトロン』を挟む"],
+   ["S3","2015","tv","","",0,0,
+    "第19話と第20話の間に『シビル・ウォー』を挟む"],
+   ["S4","2016","tv","","",0,0,
+    "ソコヴィア協定の後。第6話と第7話の間に『ドクター・ストレンジ』"],
+   ["S5","2017","tv","","",0,0,
+    "終盤が『インフィニティ・ウォー』と重なる時期"],
+   ["S6","2019","tv","","",0,0,
+    "S5の1年後。ここから映画とのつながりがほぼ切れる"],
+   ["S7","2020","tv","","",0,0,
+    "1931年から時代を遡るタイムトラベル編。独自の時間軸へ"]]},
+  {name:"エージェント・カーター",series:true,meta:"全2シーズン・2015–2016",items:[
+   ["S1","2015","tv","","",0,0,
+    "1946年。『ザ・ファースト・アベンジャー』の翌年"],
+   ["S2","2016","tv","","",0,0,
+    "1947年。舞台がロサンゼルスに移る"]]},
+  {name:"その他",items:[
+   ["インヒューマンズ","2017","tv","","",0,0,
+    "『エージェント・オブ・シールド』のインヒューマン編（S2〜）の後"],
+   ["ランナウェイズ","2017","tv","","全3シーズン",0,0,
+    "本編とのつながりは薄い。いつ観てもいい"],
+   ["クローク&ダガー","2018","tv","","全2シーズン",0,0,
+    "単独で完結。『ランナウェイズ』S3と交差する"],
+   ["ヘルストロム","2020","tv","","",0,0,
+    "本編とのつながりなし。完全に独立"]]}]},
 {no:"09",span:3,variant:"v-coupon",title:"短編・番外編",
- cap:"5分〜20分の小品と、別世界線のアニメ。",
+ cap:"5分〜20分の小品。▸ は本編のどこで観るかの目安です。",
  groups:[
   {name:"マーベル・ワンショット",items:[
-   ["相談者","2011","sp"],["ザ・ハンマーを探して","2011","sp"],["アイテム47","2012","sp"],
-   ["エージェント・カーター","2013","sp"],["王様万歳","2014","sp"]]},
+   ["相談者","2011","sp","","",0,0,
+    "『インクレディブル・ハルク』の後日談。『アベンジャーズ』の前に"],
+   ["ザ・ハンマーを探して","2011","sp","","",0,0,
+    "『アイアンマン2』の直後、『マイティ・ソー』の直前"],
+   ["アイテム47","2012","sp","","",0,0,
+    "『アベンジャーズ』の直後。残されたチタウリの銃の話"],
+   ["エージェント・カーター","2013","sp","","",0,0,
+    "1946年。ドラマ版『エージェント・カーター』と同じ年の短編"],
+   ["王様万歳","2014","sp","","",0,0,
+    "『アイアンマン3』の後。『シャン・チー』につながる"]]},
   {name:"その他",items:[
-   ["スパイダーマン：フレンドリー・ネイバーフッド シーズン1","2025","anime"],
-   ["マーベル・スタジオ：レジェンド","随時","sp","","復習用"],
-   ["アッセンブルド（制作の裏側）","随時","sp","","メイキング"]]}]}
+   ["スパイダーマン：フレンドリー・ネイバーフッド シーズン1","2025","anime","","",0,0,
+    "別の世界線。本編とは独立している"],
+   ["マーベル・スタジオ：レジェンド","随時","sp","","復習用",0,0,
+    "新作を観る前に。関連する過去作だけを短くまとめたもの"],
+   ["アッセンブルド（制作の裏側）","随時","sp","","メイキング",0,0,
+    "各作品を観終わった後に"]]}]}
 ];
 
 const SOON=[
@@ -638,19 +692,24 @@ const SOON=[
 const KIND={film:["",""],tv:["ドラマ",""],anime:["アニメ","a"],sp:["特別編","s"]};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function row(item,base,i){
-  const [t,y,kind,tier,note,wait,start]=item;
+function row(item,base,i,ser){
+  const [t,y,kind,tier,note,wait,start,when]=item;
   const k=KIND[kind]||KIND.film;
-  const cls=[base,tier||"",wait?"wait":""].filter(Boolean).join(" ");
-  const inner=`<span class="wn">${String(i).padStart(2,"0")}</span>`
-   +`<span class="wt">${start?'<span class="start">まずここ</span>':""}${esc(t)}`
-   +(k[0]?`<span class="wk ${k[1]}">${k[0]}</span>`:"")
-   +(note?`<span class="wnote">※${esc(note)}</span>`:"")
-   +`</span><span class="wy">${esc(y)}</span>`;
-  const key=esc(t+"|"+y);
+  const full=ser?ser+" "+t:t;
+  const cls=[base,ser?"srow":"",tier||"",wait?"wait":""].filter(Boolean).join(" ");
+  const inner=ser
+   ? `<span class="wn sn2">${esc(t)}</span>`
+     +`<span class="wt">${esc(when||"")}</span><span class="wy">${esc(y)}</span>`
+   : `<span class="wn">${String(i).padStart(2,"0")}</span>`
+     +`<span class="wt">${start?'<span class="start">まずここ</span>':""}${esc(t)}`
+     +(k[0]?`<span class="wk ${k[1]}">${k[0]}</span>`:"")
+     +(note?`<span class="wnote">※${esc(note)}</span>`:"")
+     +(when?`<span class="when">${esc(when)}</span>`:"")
+     +`</span><span class="wy">${esc(y)}</span>`;
+  const key=esc(full+"|"+y);
   if(wait) return `<div class="${cls}" data-k="${kind}" data-key="${key}">${inner}`
    +`<span class="soon-tag">公開待ち</span></div>`;
-  return `<label class="${cls} chk" data-k="${kind}" data-key="${key}" data-t="${esc(t)}" data-tier="${tier||""}">`
+  return `<label class="${cls} chk" data-k="${kind}" data-key="${key}" data-t="${esc(full)}" data-tier="${tier||""}">`
    +`<input type="checkbox">${inner}<span class="slot" aria-hidden="true">観</span></label>`;
 }
 
@@ -676,9 +735,13 @@ BACK.forEach(s=>{
    +`<h3><span class="sn">${s.no}</span>${esc(s.title)}<span class="sc">${n}</span></h3>`
    +`<p class="cap">${esc(s.cap)}</p>`;
   s.groups.forEach(g=>{
-    if(g.name) bh+=`<div class="grp">${esc(g.name)}</div>`;
+    if(g.series){
+      bh+=`<div class="ser"><b>${esc(g.name)}</b>`
+       +(g.meta?`<span>${esc(g.meta)}</span>`:"")
+       +(g.start?'<span class="start">まずここ</span>':"")+`</div>`;
+    }else if(g.name){ bh+=`<div class="grp">${esc(g.name)}</div>`; }
     bh+=s.dense?`<div class="lst">`:`<div>`;
-    g.items.forEach(it=>{ bh+=row(it,"p",++i); });
+    g.items.forEach(it=>{ bh+=row(it,"p",g.series?0:++i,g.series?g.name:null); });
     bh+=`</div>`;
   });
   bh+=`</section>`;
