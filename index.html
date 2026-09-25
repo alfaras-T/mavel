@@ -17,11 +17,13 @@
   --k:#16131a;          /* 墨 */
   --k-2:#211c26;
   --red:#d8232a;
+  --red-hi:#ff5c61;     /* 墨の面に載せる赤い文字 */
+  --red-ink:#b01c22;    /* 新聞面に載せる赤い文字 */
   --cyan:#0f8fc4;
   --yellow:#f2b705;
   --news:#dbd6c5;       /* 新聞用紙 */
   --news-l:#e7e2d4;
-  --paper-ink:rgba(22,19,26,.6);
+  --paper-ink:rgba(22,19,26,.68);
 
   --mono:ui-monospace,"SF Mono",Menlo,"Osaka-Mono",monospace;
   --sans:-apple-system,"Hiragino Sans","ヒラギノ角ゴシック ProN","Yu Gothic","Noto Sans JP",sans-serif;
@@ -59,7 +61,7 @@ body{
 .mast > *{position:relative;z-index:1;}
 
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,255,255,.42);display:flex;gap:13px;align-items:center;margin-bottom:16px;}
+  color:rgba(255,255,255,.58);display:flex;gap:13px;align-items:center;margin-bottom:16px;}
 .eyebrow b{color:var(--red);font-weight:700;}
 .eyebrow i{flex:1;height:1px;background:rgba(255,255,255,.15);}
 
@@ -73,7 +75,7 @@ h1.title::before,h1.title::after{content:attr(data-t);position:absolute;top:0;le
 h1.title::before{color:var(--red);transform:translate(3px,2px);z-index:2;}
 h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 
-.lede{margin:18px 0 0;max-width:33em;font-size:13.5px;color:rgba(255,255,255,.58);line-height:1.8;}
+.lede{margin:18px 0 0;max-width:33em;font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.8;}
 .lede em{font-style:normal;color:#fff;border-bottom:1px solid var(--red);padding-bottom:1px;}
 .lede b{color:#fff;font-weight:800;}
 
@@ -82,7 +84,7 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .rate{display:flex;align-items:baseline;gap:7px;}
 .rate .big{font-size:54px;font-weight:900;letter-spacing:-.055em;line-height:.82;font-variant-numeric:tabular-nums;}
 .rate .pc{font-size:15px;font-weight:800;color:var(--red);}
-.rate .fr{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.45);letter-spacing:.03em;}
+.rate .fr{margin-left:auto;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.62);letter-spacing:.03em;}
 .ticks{display:flex;flex-wrap:wrap;gap:2px;margin:15px 0 0;}
 .ticks i{width:3px;height:10px;background:rgba(255,255,255,.14);}
 .ticks i.on{background:var(--red);}
@@ -92,27 +94,35 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
   border:0;border-left:2px solid var(--yellow);cursor:pointer;display:block;width:100%;
   text-align:left;color:inherit;font:inherit;}
 .nextup:hover{background:rgba(255,255,255,.1);}
-.nextup .lb{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--yellow);
+.nextup .lb{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--yellow);
   display:block;margin-bottom:3px;}
 .nextup .tt{font-size:13px;font-weight:700;color:#fff;line-height:1.45;display:block;}
 
 .tools{display:flex;flex-wrap:wrap;gap:0 13px;margin-top:16px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;}
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;}
 .tools button{appearance:none;background:none;border:0;border-bottom:1px solid transparent;
-  padding:3px 0;cursor:pointer;font:inherit;color:rgba(255,255,255,.48);}
+  padding:3px 0;cursor:pointer;font:inherit;color:rgba(255,255,255,.62);}
 .tools button[aria-pressed=true]{color:#fff;border-bottom-color:var(--red);}
-.tools .rst{margin-left:auto;color:rgba(255,255,255,.3);text-decoration:underline dotted;}
-.nostore{margin:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
-  color:rgba(242,183,5,.75);line-height:1.6;}
+.tools .rst{margin-left:auto;color:rgba(255,255,255,.5);text-decoration:underline dotted;}
+.nostore{margin:9px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;
+  color:rgba(242,183,5,.8);line-height:1.6;}
 .nostore[hidden]{display:none;}
-.swstat{margin:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
-  line-height:1.6;color:rgba(255,255,255,.4);display:flex;align-items:baseline;gap:7px;}
+.swstat{margin:9px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;
+  line-height:1.6;color:rgba(255,255,255,.58);display:flex;align-items:baseline;gap:7px;}
 .swstat .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);flex:0 0 auto;}
-.swstat.ready{color:rgba(255,255,255,.5);} .swstat.ready .dot{background:#3fbf6f;}
+.swstat.ready{color:rgba(255,255,255,.66);} .swstat.ready .dot{background:#3fbf6f;}
 .swstat.busy .dot{background:var(--yellow);}
-.swstat.off{color:rgba(242,183,5,.8);} .swstat.off .dot{background:var(--red);}
+.swstat.off{color:rgba(242,183,5,.85);} .swstat.off .dot{background:var(--red);}
 .swstat button{appearance:none;background:none;border:0;padding:0;margin-left:auto;cursor:pointer;
-  font:inherit;color:rgba(255,255,255,.45);text-decoration:underline dotted;}
+  font:inherit;color:rgba(255,255,255,.62);text-decoration:underline dotted;}
+
+/* スタンプの控え（書き出し・復元） */
+.bk{margin:9px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 13px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:rgba(255,255,255,.58);}
+.bk button{appearance:none;background:none;border:0;padding:3px 0;cursor:pointer;
+  font:inherit;color:rgba(255,255,255,.75);text-decoration:underline dotted;}
+.bkmsg{margin:4px 0 0;font-size:11px;line-height:1.6;color:var(--yellow);}
+.bkmsg[hidden]{display:none;}
 
 /* 通信状態 */
 .net{color:var(--yellow);letter-spacing:.18em;}
@@ -131,21 +141,21 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .upd button{appearance:none;background:none;border:0;padding:4px 0;cursor:pointer;
   font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#fff;
   border-bottom:1px solid var(--yellow);}
-.upd .later{margin-left:auto;color:rgba(255,255,255,.4);border-bottom-color:transparent;
+.upd .later{margin-left:auto;color:rgba(255,255,255,.6);border-bottom-color:transparent;
   text-decoration:underline dotted;}
 .legend{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.13);
   display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:baseline;
-  font-size:10px;color:rgba(255,255,255,.42);letter-spacing:.02em;}
-.legend dt{color:rgba(255,255,255,.6);}
+  font-size:11px;color:rgba(255,255,255,.58);letter-spacing:.02em;}
+.legend dt{color:rgba(255,255,255,.75);}
 .legend dd{margin:0;font-family:var(--mono);letter-spacing:.06em;}
 .legend .a{color:#fff;font-weight:900;}
-.legend .c{opacity:.5;font-size:9px;}
+.legend .c{color:rgba(255,255,255,.62);font-size:10.5px;}
 
 /* ═══════════ 本編 ═══════════ */
 .feature{background:var(--k-2);color:#fff;padding:0 40px 50px;}
 .feat-head{display:flex;align-items:flex-end;gap:16px;padding:32px 0 9px;border-bottom:3px solid var(--red);}
 .feat-head h2{margin:0;font-size:25px;font-weight:900;letter-spacing:-.02em;}
-.feat-head p{margin:0 0 3px;font-size:12px;color:rgba(255,255,255,.48);max-width:29em;line-height:1.65;}
+.feat-head p{margin:0 0 3px;font-size:12px;color:rgba(255,255,255,.62);max-width:29em;line-height:1.65;}
 .feat-head .cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--yellow);
   letter-spacing:.1em;white-space:nowrap;}
 
@@ -155,10 +165,10 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .rail .pn{font-family:var(--mono);font-size:50px;font-weight:700;line-height:.78;letter-spacing:-.05em;
   color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.32);}
 .rail .pl{font-size:15px;font-weight:800;margin-top:9px;}
-.rail .py{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.36);letter-spacing:.08em;margin-top:3px;}
-.rail .saga{display:inline-block;margin-top:11px;font-family:var(--mono);font-size:9px;letter-spacing:.11em;
+.rail .py{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.08em;margin-top:3px;}
+.rail .saga{display:inline-block;margin-top:11px;font-family:var(--mono);font-size:10px;letter-spacing:.11em;
   color:var(--k);background:var(--yellow);padding:2px 6px;}
-.rail .memo{margin:16px 0 0;font-size:11.5px;line-height:1.85;color:rgba(255,255,255,.6);
+.rail .memo{margin:16px 0 0;font-size:12px;line-height:1.85;color:rgba(255,255,255,.7);
   border-left:2px solid var(--red);padding-left:10px;}
 
 .works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px;}
@@ -170,22 +180,23 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .w:hover .wt{color:#fff;}
 .w:focus-within{outline:2px solid var(--yellow);outline-offset:3px;}
 .w input{position:absolute;opacity:0;width:0;height:0;}
-.wn{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.36);}
-.wt{font-size:13.5px;color:rgba(255,255,255,.85);transition:color .15s,opacity .15s;}
-.wy{font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.38);font-variant-numeric:tabular-nums;}
-.wk{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;margin-left:7px;color:var(--cyan);vertical-align:1px;}
+.wn{font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.5);}
+.wt{font-size:13.5px;color:rgba(255,255,255,.88);transition:color .15s,opacity .15s;}
+.wy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.56);font-variant-numeric:tabular-nums;}
+.wk{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;margin-left:7px;color:var(--cyan);vertical-align:1px;
+  white-space:nowrap;}
 .wk.a{color:#e46fa5;} .wk.s{color:var(--yellow);}
-.wnote{font-size:10.5px;color:rgba(255,255,255,.38);margin-left:7px;}
-.start{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--red);
-  border:1px solid var(--red);padding:0 4px;margin-right:7px;vertical-align:1.5px;}
+.wnote{font-size:11px;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.56);margin-left:7px;white-space:nowrap;}
+.start{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--red-hi);
+  border:1px solid var(--red-hi);padding:0 4px;margin-right:7px;vertical-align:1.5px;white-space:nowrap;}
 
 .w.core{grid-column:1/-1;padding-top:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.13);}
 .w.core .wt{font-size:16.5px;font-weight:800;letter-spacing:-.015em;color:#fff;}
-.w.core .wn{color:var(--red);font-weight:700;font-size:11px;}
+.w.core .wn{color:var(--red-hi);font-weight:700;font-size:11px;}
 .w.core::before{content:"";position:absolute;left:-13px;top:13px;bottom:13px;width:3px;background:var(--red);}
 .w.deep{padding-top:4px;padding-bottom:4px;}
-.w.deep .wt{font-size:11.5px;color:rgba(255,255,255,.44);}
-.w.deep .wy{font-size:9.5px;color:rgba(255,255,255,.28);}
+.w.deep .wt{font-size:12px;color:rgba(255,255,255,.62);}
+.w.deep .wy{font-size:10.5px;color:rgba(255,255,255,.5);}
 
 /* ── スタンプ ── */
 .slot{position:absolute;right:2px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;
@@ -207,17 +218,17 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .w.wait,.p.wait{cursor:default;}
 .w.wait{padding-right:66px;} .p.wait{padding-right:58px;}
 .v-dense .p.wait{padding-right:54px;}
-.w.wait .wt{color:rgba(255,255,255,.5);}
+.w.wait .wt{color:rgba(255,255,255,.62);}
 .soon-tag{position:absolute;right:0;top:50%;transform:translateY(-50%);
-  font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--yellow);
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--yellow);
   border:1px solid rgba(242,183,5,.45);padding:1px 5px;}
-.p.wait .soon-tag{color:#8a6608;border-color:rgba(138,102,8,.5);}
+.p.wait .soon-tag{color:#735406;border-color:rgba(115,84,6,.5);}
 
 /* サーガの切れ目 */
 .brk{margin:24px 0 4px;padding:12px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
   border-top:3px double rgba(255,255,255,.26);border-bottom:3px double rgba(255,255,255,.26);}
 .brk b{font-size:14px;font-weight:900;letter-spacing:.03em;}
-.brk span{font-size:11.5px;color:rgba(255,255,255,.48);}
+.brk span{font-size:12px;color:rgba(255,255,255,.62);}
 .brk em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10px;
   color:var(--k);background:#fff;padding:3px 8px;letter-spacing:.1em;}
 
@@ -242,73 +253,75 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 @media (max-width:940px){ .bm{grid-template-columns:1fr;} .bm > *{grid-column:auto !important;} }
 
 .sec h3{margin:0 0 3px;font-size:15px;font-weight:900;display:flex;align-items:baseline;gap:8px;}
-.sec h3 .sn{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:.1em;}
-.sec h3 .sc{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--paper-ink);letter-spacing:.05em;}
-.sec .cap{margin:0 0 8px;font-size:11.5px;color:var(--paper-ink);line-height:1.75;}
-.sec .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--paper-ink);margin:13px 0 3px;}
+.sec h3 .sn{font-family:var(--mono);font-size:10.5px;color:var(--red-ink);letter-spacing:.1em;}
+.sec h3 .sc{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--paper-ink);letter-spacing:.05em;}
+.sec .cap{margin:0 0 8px;font-size:12px;color:var(--paper-ink);line-height:1.75;}
+.sec .grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--paper-ink);margin:13px 0 3px;}
 
 .p{position:relative;display:grid;grid-template-columns:21px minmax(0,1fr) auto;gap:0 8px;align-items:baseline;
   padding:4.5px 26px 4.5px 0;cursor:pointer;border-bottom:1px solid rgba(22,19,26,.11);}
 .p:last-child{border-bottom:0;}
 .p input{position:absolute;opacity:0;width:0;height:0;}
-.p .wn{color:rgba(22,19,26,.42);}
+.p .wn{color:rgba(22,19,26,.6);}
 .p .wt{font-size:12.5px;color:var(--k);}
-.p .wy{color:rgba(22,19,26,.44);}
-.p .wk{color:#0a6f9c;}
-.p .wk.a{color:#b4407c;} .p .wk.s{color:#8a6608;}
-.p .wnote{color:rgba(22,19,26,.42);}
+.p .wy{color:rgba(22,19,26,.64);}
+.p .wk{color:#075a80;}
+.p .wk.a{color:#9c2f68;} .p .wk.s{color:#735406;}
+.p .wnote{color:rgba(22,19,26,.64);}
 /* シリーズ見出し（作品名が主、シーズンは従） */
 .ser{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
   margin:20px 0 4px;padding-bottom:5px;border-bottom:1.5px solid rgba(22,19,26,.45);}
-.ser:first-of-type{margin-top:8px;}
+.g:first-of-type > .ser{margin-top:8px;}
 .ser b{font-size:14.5px;font-weight:900;letter-spacing:-.01em;}
-.ser span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--paper-ink);}
+.ser span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--paper-ink);}
 .ser .start{margin:0 0 0 auto;}
 .p.srow{border-bottom:1px dotted rgba(22,19,26,.16);padding-top:5px;padding-bottom:5px;}
 .p.srow:last-child{border-bottom:0;}
-.p .sn2{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--red);letter-spacing:0;}
-.p.srow .wt{font-size:11.5px;line-height:1.65;color:rgba(22,19,26,.74);}
-.p.srow .wt::before{content:"▸ ";color:var(--red);}
+.p .sn2{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red-ink);letter-spacing:0;}
+.p.srow .wt{font-size:12px;line-height:1.65;color:rgba(22,19,26,.8);}
+.p.srow .wt::before{content:"▸ ";color:var(--red-ink);}
 .p.srow input:checked ~ .wt::before{color:rgba(22,19,26,.3);}
 
-.when{display:block;margin-top:3px;font-family:var(--mono);font-size:9.5px;
-  line-height:1.7;letter-spacing:.03em;color:rgba(22,19,26,.55);}
-.when::before{content:"▸ ";color:var(--red);}
-.v-ink .when{color:rgba(255,255,255,.4);}
+.when{display:block;margin-top:3px;font-family:var(--mono);font-size:10.5px;
+  line-height:1.7;letter-spacing:.03em;color:rgba(22,19,26,.68);}
+.when::before{content:"▸ ";color:var(--red-ink);}
+.v-ink .when{color:rgba(255,255,255,.58);}
+.v-ink .when::before{color:var(--red-hi);}
 .p:hover .wt{color:#000;}
 .p:focus-within{outline:2px solid var(--red);outline-offset:3px;}
-.p .slot{width:20px;height:20px;border:1px dashed rgba(22,19,26,.22);font-size:11px;right:0;}
+.back .start{color:var(--red-ink);border-color:var(--red-ink);}
+.p .slot{width:20px;height:20px;border:1px dashed rgba(22,19,26,.3);font-size:11px;right:0;}
 .p input:checked ~ .wt,.p input:checked ~ .wn{opacity:.32;}
 .p input:checked ~ .slot{border:1.6px solid var(--red);color:var(--red);
   transform:translateY(-50%) rotate(-13deg);animation:press .26s cubic-bezier(.2,.9,.3,1);}
 
 /* ── セクション別の刷り分け ── */
 .v-ink{background:var(--k);color:#fff;padding:22px 24px 24px;}
-.v-ink h3{color:#fff;} .v-ink h3 .sc{color:rgba(255,255,255,.38);}
-.v-ink .cap,.v-ink .grp{color:rgba(255,255,255,.5);}
+.v-ink h3{color:#fff;} .v-ink h3 .sn{color:var(--red-hi);} .v-ink h3 .sc{color:rgba(255,255,255,.56);}
+.v-ink .cap,.v-ink .grp{color:rgba(255,255,255,.62);}
 .v-ink .p{border-bottom-color:rgba(255,255,255,.08);}
-.v-ink .p .wt{color:rgba(255,255,255,.82);}
-.v-ink .p .wn,.v-ink .p .wy,.v-ink .p .wnote{color:rgba(255,255,255,.3);}
+.v-ink .p .wt{color:rgba(255,255,255,.86);}
+.v-ink .p .wn,.v-ink .p .wy,.v-ink .p .wnote{color:rgba(255,255,255,.52);}
 .v-ink .p .wk{color:var(--cyan);} .v-ink .p .wk.s{color:var(--yellow);}
-.v-ink .p .slot{border-color:rgba(255,255,255,.2);}
+.v-ink .p .slot{border-color:rgba(255,255,255,.25);}
 .v-ink .p:hover .wt{color:#fff;}
-.v-ink .start{color:#ff6b6b;border-color:#ff6b6b;}
+.v-ink .start{color:var(--red-hi);border-color:var(--red-hi);}
 
 .v-blue{border-top:2px solid var(--cyan);padding-top:15px;
   background:linear-gradient(180deg,rgba(15,143,196,.1),transparent 62%);}
-.v-blue h3 .sn{color:#0a6f9c;}
+.v-blue h3 .sn{color:#075a80;}
 .v-plain{border-top:2px solid var(--red);padding-top:15px;}
 .v-box{border:2px solid var(--k);padding:17px 19px;background:var(--news-l);}
 .v-box h3{font-size:14px;}
 .v-tint{background:rgba(214,79,138,.11);padding:17px 19px;border-left:3px solid #c2417a;}
-.v-tint h3 .sn{color:#c2417a;}
+.v-tint h3 .sn{color:#9c2f68;}
 .v-dense{border-top:1px solid rgba(22,19,26,.32);padding-top:13px;}
 .v-dense h3{font-size:13px;}
 .v-dense .lst{columns:2;column-gap:28px;}
-.v-dense .p{padding:2.5px 20px 2.5px 0;border-bottom:0;break-inside:avoid;}
-.v-dense .p .wt{font-size:11px;color:rgba(22,19,26,.7);}
-.v-dense .p .wn{font-size:9px;} .v-dense .p .wy{font-size:9.5px;}
-.v-dense .p .slot{width:16px;height:16px;font-size:9px;}
+.v-dense .p{padding:2.5px 22px 2.5px 0;border-bottom:0;break-inside:avoid;}
+.v-dense .p .wt{font-size:12px;color:rgba(22,19,26,.8);}
+.v-dense .p .wn{font-size:10px;} .v-dense .p .wy{font-size:10.5px;}
+.v-dense .p .slot{width:18px;height:18px;font-size:10px;}
 .v-bare{padding-top:15px;border-top:1px dotted rgba(22,19,26,.45);}
 .v-bare h3{font-size:13.5px;}
 .v-bare .p{border-bottom:0;padding-top:3px;padding-bottom:3px;}
@@ -318,23 +331,24 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .soon{margin-top:32px;background:var(--k);color:#fff;padding:21px 26px;
   display:grid;grid-template-columns:160px minmax(0,1fr);gap:10px 26px;align-items:center;}
 .soon h3{margin:0;font-size:15px;font-weight:900;}
-.soon h3 span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;
+.soon h3 span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
   color:var(--yellow);margin-bottom:5px;}
 .soon ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px 24px;}
-.soon li{font-size:12.5px;color:rgba(255,255,255,.76);}
-.soon li i{font-style:normal;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.38);margin-left:7px;}
+.soon li{font-size:12.5px;color:rgba(255,255,255,.8);}
+.soon li i{font-style:normal;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.56);margin-left:7px;
+  white-space:nowrap;}
 @media (max-width:940px){ .soon{grid-template-columns:1fr;} }
 
 /* 編集後記 */
 .notes{margin-top:30px;padding-top:17px;border-top:1px solid rgba(22,19,26,.28);
   display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:26px;}
 @media (max-width:940px){ .notes{grid-template-columns:1fr;gap:18px;} }
-.notes h4{margin:0 0 7px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--red);}
-.notes p{margin:0 0 7px;font-size:11.5px;line-height:1.85;color:var(--paper-ink);}
-.notes .lead p{font-size:13px;line-height:1.9;color:rgba(22,19,26,.78);}
+.notes h4{margin:0 0 7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--red-ink);}
+.notes p{margin:0 0 7px;font-size:12px;line-height:1.85;color:var(--paper-ink);}
+.notes .lead p{font-size:13px;line-height:1.9;color:rgba(22,19,26,.8);}
 .notes b{color:var(--k);font-weight:700;}
 
-.foot{background:var(--k);color:rgba(255,255,255,.32);padding:17px 40px;
+.foot{background:var(--k);color:rgba(255,255,255,.52);padding:17px 40px;
   display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
   font-family:var(--mono);font-size:10px;letter-spacing:.12em;}
 .foot .bd{color:rgba(255,255,255,.75);letter-spacing:.2em;}
@@ -351,6 +365,17 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
   .v-dense .lst{columns:1;}
   .foot{padding:15px 20px;}
 }
+/* 指で押す端末では、行とボタンを押しやすい高さにそろえる */
+@media (pointer:coarse){
+  .w,.p{min-height:44px;align-content:center;}
+  .w.deep,.v-dense .p,.v-bare .p{min-height:40px;}
+  .tools{gap:0 18px;}
+  .tools button,.bk button{padding:11px 0;}
+  .swstat button{padding:8px 0;}
+  .upd button{padding:11px 0;}
+}
+/* 絞り込みで隠す */
+.flt-off{display:none !important;}
 @media (prefers-reduced-motion:reduce){ *{animation:none !important;transition:none !important;} }
 @media print{
   body{background:#fff;}
@@ -387,13 +412,13 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
   <header class="mast">
     <div>
       <div class="eyebrow"><b>MARVEL</b><span>WATCH LOG</span><i></i>
-        <span class="net" id="net" hidden>OFFLINE</span><span>2026.08</span></div>
+        <span class="net" id="net" hidden>OFFLINE</span><span id="ed"></span></div>
       <h1 class="title" data-t="マーベル全作品、">
         <span class="l1">マーベル全作品、</span>
         <span class="l2">ぜんぶ観るための地図。</span>
       </h1>
       <p class="lede">
-        映画・ドラマ・アニメを重複なしで数えて<em><span id="n-all">—</span>作品</em>。
+        映画・ドラマ・アニメを重複なしで数えて<em><span id="n-all">—</span>作品</em>（公開待ちがあと<span id="n-wait">—</span>本）。
         まずは赤い線が引かれた「幹」の<b><span id="n-core">—</span>本</b>を追えば、いまのMCUの話はつながります。
         残りは寄り道。観たらスタンプを押してください。
       </p>
@@ -419,6 +444,10 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
         <button type="button" class="rst" id="reset">RESET</button>
       </div>
       <p class="nostore" id="nostore" hidden>この環境ではスタンプが保存されません</p>
+      <div class="bk"><span>スタンプの控え</span>
+        <button type="button" id="bk-out">コピー</button>
+        <button type="button" id="bk-in">貼り付けて復元</button></div>
+      <p class="bkmsg" id="bkmsg" role="status" hidden></p>
       <div class="swstat" id="swstat"><i class="dot"></i><span id="swtext">オフライン対応を確認中…</span>
         <button type="button" id="swredo" hidden>保存し直す</button></div>
 
@@ -463,7 +492,7 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
         <div>
           <h4>この表の読み方</h4>
           <p>年は<b>世界初公開・初配信</b>の年です。『ノー・ウェイ・ホーム』のように日本公開が翌年になる作品があります。</p>
-          <p>「※01にも」と付いた作品は<b>別の欄にも載っています</b>。同じ作品なので二度観る必要はありません。</p>
+          <p>「※MCU本線にも」「※デアデビル欄にも」のように付いた作品は<b>別の欄にも載っています</b>。同じ作品なので二度観る必要はなく、スタンプもどちらか一方で押せば両方に付きます。</p>
         </div>
         <div>
           <h4>補足</h4>
@@ -477,15 +506,22 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
   <div class="foot">
     <span class="bd">MARVEL WATCH LOG</span>
     <span>2008–2027</span>
-    <span>UPDATED 2026.08.24</span>
+    <span id="upd-date"></span>
   </div>
 </div>
 
 <script>
+/* 最終更新日。上部の「2026.09」とフッターの日付はここから作る */
+const UPDATED="2026-09-25";
+
 /* ════════════════════════════════════════════════
-   データ ［タイトル, 年, 種別, 階層, 補足, 未公開, 入口］
-   種別  film / tv / anime / sp
-   階層  core=幹（太字＋赤線） / ""=枝 / deep=葉（小さく）
+   データ ［タイトル, 年, 種別, 階層, 補足, 未公開, 入口, 観る時期］
+   種別   film / tv / anime / sp
+   階層   core=幹（太字＋赤線） / ""=枝 / deep=葉（小さく）
+   未公開 1=公開日未定
+          "2026-12-18"=その日（日本時間）になると自動でスタンプを押せるようになり、
+          補足（「12月18日公開」など）も消える
+   ※ 同じ作品を複数の欄に載せると「※○○欄にも」が自動で付き、スタンプも連動する
    ════════════════════════════════════════════════ */
 const PHASES=[
  {n:"01",label:"フェーズ1",years:"2008–2012",saga:"インフィニティ・サーガ",
@@ -551,30 +587,31 @@ const PHASES=[
    ["ロキ シーズン2","2023","tv","core"],
    ["マーベルズ","2023","film",""],
    ["ホワット・イフ…? シーズン2","2023","anime","deep"],
-   ["エコー","2024","tv","deep","02にも"],
-   ["デッドプール&ウルヴァリン","2024","film","core","03にも"],
+   ["エコー","2024","tv","deep"],
+   ["デッドプール&ウルヴァリン","2024","film","core"],
    ["アガサ・オール・アロング","2024","tv","deep"],
    ["ホワット・イフ…? シーズン3","2024","anime","deep"],
    ["キャプテン・アメリカ：ブレイブ・ニュー・ワールド","2025","film",""],
-   ["デアデビル：ボーン・アゲイン シーズン1","2025","tv","","02にも"],
+   ["デアデビル：ボーン・アゲイン シーズン1","2025","tv",""],
    ["サンダーボルツ*","2025","film","core"],
    ["アイアンハート","2025","tv","deep"]]},
  {n:"06",label:"フェーズ6",years:"2025–2026",saga:"マルチバース・サーガ",
   memo:"12月18日『ドゥームズデイ』へ。ここは全部が前振りです。",
   items:[
-   ["ファンタスティック4：ファースト・ステップ","2025","film","core","05にも"],
+   ["ファンタスティック4：ファースト・ステップ","2025","film","core"],
    ["アイズ・オブ・ワカンダ","2025","anime","deep"],
    ["マーベル・ゾンビーズ","2025","anime","deep"],
    ["ワンダーマン","2026","tv","deep"],
-   ["デアデビル：ボーン・アゲイン シーズン2","2026","tv","","02にも"],
-   ["パニッシャー：ワン・ラスト・キル","2026","sp","deep","02にも"],
+   ["デアデビル：ボーン・アゲイン シーズン2","2026","tv",""],
+   ["パニッシャー：ワン・ラスト・キル","2026","sp","deep"],
    ["スパイダーマン：ブランド・ニュー・デイ","2026","film",""],
-   ["ヴィジョン・クエスト","2026","tv","","10月配信予定",1],
-   ["アベンジャーズ／ドゥームズデイ","2026","film","core","12月18日公開",1]]}
+   ["ヴィジョンクエスト","2026","tv","","10月14日配信","2026-10-14"],
+   ["アベンジャーズ／ドゥームズデイ","2026","film","core","12月18日公開","2026-12-18"]]}
 ];
 
+/* tag は「※○○欄にも」に使う欄の呼び名 */
 const BACK=[
-{no:"02",span:3,variant:"v-ink",title:"デアデビル & パニッシャー",
+{no:"02",span:3,variant:"v-ink",title:"デアデビル & パニッシャー",tag:"デアデビル欄",
  cap:"Netflix発、路地裏の物語。そのままMCU本編へ合流しました。",
  groups:[
   {name:"NETFLIX 期",items:[
@@ -586,10 +623,10 @@ const BACK=[
    ["デアデビル シーズン3","2018","tv"],["パニッシャー シーズン2","2019","tv"],
    ["ジェシカ・ジョーンズ シーズン3","2019","tv"]]},
   {name:"MCU 合流後",items:[
-   ["エコー","2024","tv","","01にも"],["デアデビル：ボーン・アゲイン シーズン1","2025","tv","","01にも"],
-   ["デアデビル：ボーン・アゲイン シーズン2","2026","tv","","01にも"],
-   ["パニッシャー：ワン・ラスト・キル","2026","sp","","01にも"]]}]},
-{no:"03",span:3,variant:"v-blue",title:"X-MEN／デッドプール",
+   ["エコー","2024","tv"],["デアデビル：ボーン・アゲイン シーズン1","2025","tv"],
+   ["デアデビル：ボーン・アゲイン シーズン2","2026","tv"],
+   ["パニッシャー：ワン・ラスト・キル","2026","sp"]]}]},
+{no:"03",span:3,variant:"v-blue",title:"X-MEN／デッドプール",tag:"X-MEN欄",
  cap:"20世紀フォックス系の別世界線。『デッドプール&ウルヴァリン』でMCUと交差しました。",
  groups:[
   {name:"実写映画",items:[
@@ -599,11 +636,11 @@ const BACK=[
    ["X-MEN：フューチャー&パスト","2014","film"],["デッドプール","2016","film"],
    ["X-MEN：アポカリプス","2016","film"],["LOGAN／ローガン","2017","film"],
    ["デッドプール2","2018","film"],["X-MEN：ダーク・フェニックス","2019","film"],
-   ["ニュー・ミュータント","2020","film"],["デッドプール&ウルヴァリン","2024","film","","01にも"]]},
+   ["ニュー・ミュータント","2020","film"],["デッドプール&ウルヴァリン","2024","film"]]},
   {name:"ドラマ・アニメ",items:[
    ["レギオン","2017","tv","","全3シーズン"],["ザ・ギフテッド","2017","tv","","全2シーズン"],
    ["X-MEN '97 シーズン1","2024","anime"],["X-MEN '97 シーズン2","2026","anime"]]}]},
-{no:"04",span:4,variant:"v-plain",title:"ソニー版スパイダーマン",
+{no:"04",span:4,variant:"v-plain",title:"ソニー版スパイダーマン",tag:"スパイダーマン欄",
  cap:"MCU版（トム・ホランド）は本線に収録。『ノー・ウェイ・ホーム』の前に旧2シリーズを観ておくと、何倍も効きます。",
  groups:[
   {name:"旧シリーズ（ライミ版 / アメイジング）",items:[
@@ -613,31 +650,33 @@ const BACK=[
   {name:"ソニー・スパイダーマン・ユニバース",items:[
    ["ヴェノム","2018","film"],["ヴェノム：レット・ゼア・ビー・カーネイジ","2021","film"],
    ["モービウス","2022","film"],["マダム・ウェブ","2024","film"],
-   ["ヴェノム：ザ・ラストダンス","2024","film"],["クレイヴン・ザ・ハンター","2024","film"]]}]},
-{no:"05",span:2,variant:"v-box",title:"ファンタスティック・フォー",
+   ["ヴェノム：ザ・ラストダンス","2024","film"],["クレイヴン・ザ・ハンター","2024","film"]]},
+  {name:"実写ドラマ",items:[
+   ["スパイダー・ノワール","2026","tv","","Prime Video"]]}]},
+{no:"05",span:2,variant:"v-box",title:"ファンタスティック・フォー",tag:"ファンタスティック・フォー欄",
  cap:"3度の映画化を経て、2025年からMCUへ。",
  groups:[{name:"",items:[
   ["ファンタスティック・フォー〈超能力ユニット〉","2005","film"],
   ["ファンタスティック・フォー：銀河の危機","2007","film"],
   ["ファンタスティック・フォー","2015","film"],
-  ["ファンタスティック4：ファースト・ステップ","2025","film","","01にも",0,1]]}]},
-{no:"06",span:2,variant:"v-tint",title:"スパイダーバース",
+  ["ファンタスティック4：ファースト・ステップ","2025","film","","",0,1]]}]},
+{no:"06",span:2,variant:"v-tint",title:"スパイダーバース",tag:"スパイダーバース欄",
  cap:"予備知識ゼロで観られるアニメ三部作。",
  groups:[{name:"",items:[
   ["スパイダーマン：スパイダーバース","2018","anime","","",0,1],
   ["スパイダーマン：アクロス・ザ・スパイダーバース","2023","anime"],
   ["スパイダーマン：ビヨンド・ザ・スパイダーバース","2027","anime","","2027年6月",1]]}]},
-{no:"07",span:4,variant:"v-dense",title:"MCU以前の旧作",dense:true,
+{no:"07",span:4,variant:"v-dense",title:"MCU以前の旧作",tag:"旧作欄",dense:true,
  cap:"1986〜2012年。マニア向け。時間があるときに。",
  groups:[{name:"",items:[
-  ["ハワード・ザ・ダック／暗黒魔王の陰謀","1986","film"],["パニッシャー","1989","film"],
+  ["ハワード・ザ・ダック／暗黒魔王の陰謀","1986","film"],["パニッシャー","1989","film","","ドルフ・ラングレン版"],
   ["キャプテン・アメリカ","1990","film"],["ブレイド","1998","film","","",0,1],
   ["ブレイド2","2002","film"],["デアデビル","2003","film"],
-  ["ハルク","2003","film"],["パニッシャー","2004","film"],
+  ["ハルク","2003","film"],["パニッシャー","2004","film","","トーマス・ジェーン版"],
   ["ブレイド3","2004","film"],["エレクトラ","2005","film"],
   ["マン・シング","2005","film"],["ゴーストライダー","2007","film"],
   ["パニッシャー：ウォー・ゾーン","2008","film"],["ゴーストライダー2","2012","film"]]}]},
-{no:"08",span:3,variant:"v-bare",title:"マーベル・テレビジョン系",
+{no:"08",span:3,variant:"v-bare",title:"マーベル・テレビジョン系",tag:"テレビジョン欄",
  cap:"ABC・Huluなどの旧ドラマ。▸ は本編のどこで観るかの目安です。『エージェント・オブ・シールド』は映画をシーズンの途中に挟む作りなので、話数まで書いています。",
  groups:[
   {name:"エージェント・オブ・シールド",series:true,meta:"全7シーズン・2013–2020",start:true,items:[
@@ -654,7 +693,7 @@ const BACK=[
    ["S6","2019","tv","","",0,0,
     "S5の1年後。ここから映画とのつながりがほぼ切れる"],
    ["S7","2020","tv","","",0,0,
-    "1931年から時代を遡るタイムトラベル編。独自の時間軸へ"]]},
+    "1931年から現代へ、時代を下っていくタイムトラベル編。独自の時間軸へ"]]},
   {name:"エージェント・カーター",series:true,meta:"全2シーズン・2015–2016",items:[
    ["S1","2015","tv","","",0,0,
     "1946年。『ザ・ファースト・アベンジャー』の翌年"],
@@ -669,7 +708,7 @@ const BACK=[
     "単独で完結。『ランナウェイズ』S3と交差する"],
    ["ヘルストロム","2020","tv","","",0,0,
     "本編とのつながりなし。完全に独立"]]}]},
-{no:"09",span:3,variant:"v-coupon",title:"短編・番外編",
+{no:"09",span:3,variant:"v-coupon",title:"短編・番外編",tag:"短編欄",
  cap:"5分〜20分の小品。▸ は本編のどこで観るかの目安です。",
  groups:[
   {name:"マーベル・ワンショット",items:[
@@ -693,8 +732,9 @@ const BACK=[
 ];
 
 const SOON=[
- ["スパイダーマン：フレンドリー・ネイバーフッド シーズン2","2026年秋"],
- ["アベンジャーズ：シークレット・ウォーズ","2027年12月17日"],
+ ["スパイダーマン：フレンドリー・ネイバーフッド シーズン2","2027年1月"],
+ ["デアデビル：ボーン・アゲイン シーズン3","2027年3月"],
+ ["アベンジャーズ／シークレット・ウォーズ","2027年12月17日（米国）"],
  ["ブレイド（MCU版）","公開日未定"],
  ["アーマー・ウォーズ","公開日未定"]
 ];
@@ -702,10 +742,32 @@ const SOON=[
 const KIND={film:["",""],tv:["ドラマ",""],anime:["アニメ","a"],sp:["特別編","s"]};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function row(item,base,i,ser){
-  const [t,y,kind,tier,note,wait,start,when]=item;
+const [uy,um,ud]=UPDATED.split("-");
+document.getElementById("ed").textContent=uy+"."+um;
+document.getElementById("upd-date").textContent="UPDATED "+uy+"."+um+"."+ud;
+
+/* 公開日（日本時間の0時）を過ぎたか */
+const released=w=>typeof w==="string"&&Date.now()>=Date.parse(w+"T00:00:00+09:00");
+const waiting=w=>!!w&&!released(w);
+
+/* 作品の見分け。同じキーの行はスタンプが連動する */
+const keyOf=(item,ser)=>(ser?ser+" "+item[0]:item[0])+"|"+item[1];
+
+/* 同じ作品が載っている欄を先に集めておき、「※○○欄にも」を自動で付ける */
+const MCU_TAG="MCU本線";
+const places=new Map();
+const addPlace=(k,p)=>{ const a=places.get(k)||[]; if(!a.includes(p)) a.push(p); places.set(k,a); };
+PHASES.forEach(p=>p.items.forEach(it=>addPlace(keyOf(it),MCU_TAG)));
+BACK.forEach(s=>s.groups.forEach(g=>g.items.forEach(it=>addPlace(keyOf(it,g.series?g.name:null),s.tag))));
+
+function row(item,base,i,ser,here){
+  const [t,y,kind,tier,note,w,start,when]=item;
+  const wait=waiting(w);
   const k=KIND[kind]||KIND.film;
   const full=ser?ser+" "+t:t;
+  const key=keyOf(item,ser);
+  const also=places.get(key).filter(p=>p!==here).join("・");
+  const shown=released(w)?"":note;
   const cls=[base,ser?"srow":"",tier||"",wait?"wait":""].filter(Boolean).join(" ");
   const inner=ser
    ? `<span class="wn sn2">${esc(t)}</span>`
@@ -713,13 +775,13 @@ function row(item,base,i,ser){
    : `<span class="wn">${String(i).padStart(2,"0")}</span>`
      +`<span class="wt">${start?'<span class="start">まずここ</span>':""}${esc(t)}`
      +(k[0]?`<span class="wk ${k[1]}">${k[0]}</span>`:"")
-     +(note?`<span class="wnote">※${esc(note)}</span>`:"")
+     +(shown?`<span class="wnote">※${esc(shown)}</span>`:"")
+     +(also?`<span class="wnote">※${esc(also)}にも</span>`:"")
      +(when?`<span class="when">${esc(when)}</span>`:"")
      +`</span><span class="wy">${esc(y)}</span>`;
-  const key=esc(full+"|"+y);
-  if(wait) return `<div class="${cls}" data-k="${kind}" data-key="${key}">${inner}`
+  if(wait) return `<div class="${cls}" data-k="${kind}" data-key="${esc(key)}">${inner}`
    +`<span class="soon-tag">公開待ち</span></div>`;
-  return `<label class="${cls} chk" data-k="${kind}" data-key="${key}" data-t="${esc(full)}" data-tier="${tier||""}">`
+  return `<label class="${cls} chk" data-k="${kind}" data-key="${esc(key)}" data-t="${esc(full)}" data-tier="${tier||""}">`
    +`<input type="checkbox">${inner}<span class="slot" aria-hidden="true">観</span></label>`;
 }
 
@@ -729,40 +791,46 @@ PHASES.forEach((p,idx)=>{
   html+=`<div class="phase"><div class="rail"><div class="pn">${p.n}</div>`
    +`<div class="pl">${p.label}</div><div class="py">${p.years}</div>`
    +`<div class="saga">${p.saga}</div><p class="memo">${p.memo}</p></div><div class="works">`;
-  p.items.forEach(it=>{ html+=row(it,"w",++i); });
+  p.items.forEach(it=>{ html+=row(it,"w",++i,null,MCU_TAG); });
   html+=`</div></div>`;
   mcu=i;
   if(idx===2) html+=`<div class="brk"><b>インフィニティ・サーガ 完結</b>`
    +`<span>ここでいったん止めても、物語はきれいに閉じます。</span><em>23 FILMS</em></div>`;
 });
 document.getElementById("phases").innerHTML=html;
-document.getElementById("cnt-mcu").textContent=mcu+" WORKS";
 
-let bh="",back=0;
+let bh="";
 BACK.forEach(s=>{
-  const n=s.groups.reduce((a,g)=>a+g.items.length,0); back+=n; let i=0;
+  let i=0;
   bh+=`<section class="sec ${s.variant}" style="grid-column:span ${s.span}">`
-   +`<h3><span class="sn">${s.no}</span>${esc(s.title)}<span class="sc">${n}</span></h3>`
+   +`<h3><span class="sn">${s.no}</span>${esc(s.title)}<span class="sc"></span></h3>`
    +`<p class="cap">${esc(s.cap)}</p>`;
   s.groups.forEach(g=>{
+    bh+=`<div class="g">`;
     if(g.series){
       bh+=`<div class="ser"><b>${esc(g.name)}</b>`
        +(g.meta?`<span>${esc(g.meta)}</span>`:"")
        +(g.start?'<span class="start">まずここ</span>':"")+`</div>`;
     }else if(g.name){ bh+=`<div class="grp">${esc(g.name)}</div>`; }
     bh+=s.dense?`<div class="lst">`:`<div>`;
-    g.items.forEach(it=>{ bh+=row(it,"p",g.series?0:++i,g.series?g.name:null); });
-    bh+=`</div>`;
+    g.items.forEach(it=>{ bh+=row(it,"p",g.series?0:++i,g.series?g.name:null,s.tag); });
+    bh+=`</div></div>`;
   });
   bh+=`</section>`;
 });
 document.getElementById("bm").innerHTML=bh;
-document.getElementById("cnt-back").textContent=back+" WORKS";
 document.getElementById("soon-list").innerHTML=
   SOON.map(([t,d])=>`<li>${esc(t)}<i>${esc(d)}</i></li>`).join("");
 
 /* ── 進捗・保存・操作 ── */
 const STORE="marvel-watch-log.v1";
+
+/* タイトルや年を直すとキーが変わり、押してあったスタンプとつながらなくなる。
+   直したときは「旧キー: 新キー」をここに足すと、スタンプが新しいほうに引き継がれる */
+const RENAMED={
+  // "旧タイトル|2026": "新タイトル|2026",
+};
+
 const all=Array.from(document.querySelectorAll(".w,.p"));
 const rows=all.filter(r=>r.classList.contains("chk"));
 
@@ -777,12 +845,15 @@ all.forEach(r=>{
 const keys=[...byKey.keys()];
 const keyPos=new Map(keys.map((k,i)=>[k,i]));
 const watchable=keys.filter(k=>!byKey.get(k).wait);
+const watchSet=new Set(watchable);
 
 const ticks=document.getElementById("ticks");
 ticks.innerHTML=keys.map(k=>byKey.get(k).wait?'<i class="wait"></i>':"<i></i>").join("");
 const tk=Array.from(ticks.children);
 
-document.getElementById("n-all").textContent=keys.length+SOON.length;
+/* 「○作品」は進捗の分母と同じ数。公開待ちは別に数える */
+document.getElementById("n-all").textContent=watchable.length;
+document.getElementById("n-wait").textContent=keys.length-watchable.length+SOON.length;
 document.getElementById("n-core").textContent=all.filter(r=>r.classList.contains("core")).length;
 
 /* localStorage が使えない環境（プレビュー等）では黙って無効化する */
@@ -790,13 +861,28 @@ let store=null;
 try{ localStorage.setItem(STORE+".t","1"); localStorage.removeItem(STORE+".t"); store=localStorage; }
 catch(e){ document.getElementById("nostore").hidden=false; }
 
-function save(){
-  if(!store) return;
-  try{ store.setItem(STORE,JSON.stringify(watchable.filter(isOn))); }catch(e){}
-}
+/* いまのデータにないキー（改題前の名前、公開待ちに戻した作品など）も捨てずに持っておく */
+let extra=[];
+
 function isOn(k){ return byKey.get(k).rows.some(r=>{const i=r.querySelector("input");return i&&i.checked;}); }
 function setKey(k,on){
   byKey.get(k).rows.forEach(r=>{const i=r.querySelector("input"); if(i) i.checked=on;});
+}
+function stamped(){ return watchable.filter(isOn).concat(extra); }
+function save(){
+  if(!store) return;
+  try{ store.setItem(STORE,JSON.stringify(stamped())); }catch(e){}
+}
+/* 保存済み・控えのキーを反映する。新しく付いたスタンプの数を返す */
+function apply(list){
+  let n=0;
+  list.forEach(k=>{
+    if(typeof k!=="string") return;
+    k=RENAMED[k]||k;
+    if(watchSet.has(k)){ if(!isOn(k)) n++; setKey(k,true); }
+    else if(!extra.includes(k)) extra.push(k);
+  });
+  return n;
 }
 
 function update(){
@@ -819,32 +905,72 @@ rows.forEach(r=>r.querySelector("input").addEventListener("change",e=>{
 }));
 document.getElementById("reset").addEventListener("click",()=>{
   if(!confirm("スタンプをすべて消します。よろしいですか？")) return;
-  keys.forEach(k=>setKey(k,false)); update(); save();
+  keys.forEach(k=>setKey(k,false)); extra=[]; update(); save();
 });
+
+/* ── 絞り込み ── */
+const filters=Array.from(document.querySelectorAll(".tools button[data-f]"));
+const visible=el=>el.querySelectorAll(".w:not(.flt-off),.p:not(.flt-off)").length;
+function applyFilter(f){
+  filters.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===f)));
+  all.forEach(r=>{
+    const k=r.dataset.k;
+    r.classList.toggle("flt-off",!(f==="all"||k===f||(f==="tv"&&k==="sp")));
+  });
+  /* 中身がなくなった見出し・欄・フェーズごと隠し、件数も表示中の数にする */
+  document.querySelectorAll(".g,.sec,.phase").forEach(el=>el.classList.toggle("flt-off",!visible(el)));
+  const brk=document.querySelector(".brk");
+  if(brk) brk.classList.toggle("flt-off",brk.previousElementSibling.classList.contains("flt-off"));
+  document.querySelectorAll(".sec").forEach(s=>{ s.querySelector(".sc").textContent=visible(s); });
+  document.getElementById("cnt-mcu").textContent=visible(document.getElementById("phases"))+" WORKS";
+  document.getElementById("cnt-back").textContent=visible(document.getElementById("bm"))+" WORKS";
+}
+filters.forEach(b=>b.addEventListener("click",()=>applyFilter(b.dataset.f)));
+applyFilter("all");
+
 document.getElementById("nextup").addEventListener("click",()=>{
   const g=document.getElementById("next-t").dataset.go;
   if(g===undefined) return;
   const el=all[+g];
+  /* 絞り込みで隠れていたら「すべて」に戻してから飛ぶ */
+  if(el.closest(".flt-off")) applyFilter("all");
   el.scrollIntoView({behavior:"smooth",block:"center"});
   el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit");
 });
-document.querySelectorAll(".tools button[data-f]").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const f=btn.dataset.f;
-    document.querySelectorAll(".tools button[data-f]")
-      .forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
-    all.forEach(r=>{
-      const k=r.dataset.k;
-      r.style.display=(f==="all"||k===f||(f==="tv"&&k==="sp"))?"":"none";
-    });
-  });
+
+/* ── スタンプの控え（機種変更や、保存が消えたときの復元用） ── */
+const bkmsg=document.getElementById("bkmsg");
+let bkTimer=0;
+function tell(msg){
+  bkmsg.textContent=msg; bkmsg.hidden=false;
+  clearTimeout(bkTimer); bkTimer=setTimeout(()=>{ bkmsg.hidden=true; },8000);
+}
+document.getElementById("bk-out").addEventListener("click",async()=>{
+  const list=stamped();
+  if(!list.length){ tell("まだスタンプがありません。"); return; }
+  const code=JSON.stringify(list);
+  try{
+    await navigator.clipboard.writeText(code);
+    tell(watchable.filter(isOn).length+"本分をコピーしました。メモなどに貼り付けて保管してください。");
+  }catch(e){
+    prompt("この文字列をすべてコピーして保管してください",code);
+  }
+});
+document.getElementById("bk-in").addEventListener("click",()=>{
+  const s=prompt("控えておいた文字列を貼り付けてください。\nいまのスタンプは消えず、足されます。");
+  if(!s) return;
+  let list=null;
+  try{ list=JSON.parse(s.trim()); }catch(e){}
+  if(!Array.isArray(list)){ tell("読み取れませんでした。コピーした文字列をそのまま貼り付けてください。"); return; }
+  const n=apply(list); update(); save();
+  tell(n?n+"本のスタンプを復元しました。":"新しく付いたスタンプはありませんでした。");
 });
 
 /* 前回のスタンプを復元 */
 if(store){
   try{
     const saved=JSON.parse(store.getItem(STORE)||"[]");
-    if(Array.isArray(saved)) saved.forEach(k=>{ if(byKey.has(k)) setKey(k,true); });
+    if(Array.isArray(saved)) apply(saved);
   }catch(e){}
 }
 update();
