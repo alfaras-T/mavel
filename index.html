@@ -105,6 +105,14 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
 .nostore{margin:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
   color:rgba(242,183,5,.75);line-height:1.6;}
 .nostore[hidden]{display:none;}
+.swstat{margin:9px 0 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
+  line-height:1.6;color:rgba(255,255,255,.4);display:flex;align-items:baseline;gap:7px;}
+.swstat .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);flex:0 0 auto;}
+.swstat.ready{color:rgba(255,255,255,.5);} .swstat.ready .dot{background:#3fbf6f;}
+.swstat.busy .dot{background:var(--yellow);}
+.swstat.off{color:rgba(242,183,5,.8);} .swstat.off .dot{background:var(--red);}
+.swstat button{appearance:none;background:none;border:0;padding:0;margin-left:auto;cursor:pointer;
+  font:inherit;color:rgba(255,255,255,.45);text-decoration:underline dotted;}
 
 /* 通信状態 */
 .net{color:var(--yellow);letter-spacing:.18em;}
@@ -411,6 +419,8 @@ h1.title::after{color:var(--cyan);transform:translate(-3px,-2px);z-index:1;}
         <button type="button" class="rst" id="reset">RESET</button>
       </div>
       <p class="nostore" id="nostore" hidden>この環境ではスタンプが保存されません</p>
+      <div class="swstat" id="swstat"><i class="dot"></i><span id="swtext">オフライン対応を確認中…</span>
+        <button type="button" id="swredo" hidden>保存し直す</button></div>
 
       <dl class="legend">
         <dt class="a">太字＋赤線</dt><dd>幹／物語の本筋</dd>
@@ -843,40 +853,78 @@ update();
 (function(){
   const bar=document.getElementById("upd");
   const net=document.getElementById("net");
+  const stat=document.getElementById("swstat");
+  const text=document.getElementById("swtext");
+  const redo=document.getElementById("swredo");
 
   const showNet=()=>{ net.hidden=navigator.onLine; };
   addEventListener("online",showNet); addEventListener("offline",showNet); showNet();
-
   document.getElementById("upd-later").addEventListener("click",()=>bar.classList.remove("on"));
 
-  if(!("serviceWorker" in navigator)) return;
-  if(location.protocol!=="https:"&&location.hostname!=="localhost") return;
+  const say=(cls,msg)=>{ stat.className="swstat "+cls; text.textContent=msg; };
 
-  let reloading=false;
+  if(!("serviceWorker" in navigator)){
+    say("off","このブラウザはオフライン保存に未対応");
+    return;
+  }
+  if(location.protocol!=="https:"&&location.hostname!=="localhost"){
+    say("off","オフライン保存にはHTTPSが必要（GitHub Pagesで開いてください）");
+    return;
+  }
+
+  /* 何件ためこめたかを直接数える */
+  async function check(){
+    try{
+      const names=(await caches.keys()).filter(n=>n.startsWith("marvel-watch-log-"));
+      if(!names.length){ say("busy","保存中…（このまま少し待ってください）"); return 0; }
+      const c=await caches.open(names[names.length-1]);
+      const n=(await c.keys()).length;
+      if(n>=6){ say("ready","オフライン準備完了・"+n+"件保存済み"); redo.hidden=false; }
+      else say("busy","保存中… "+n+"/6");
+      return n;
+    }catch(e){ say("off","保存領域を使えません"); return 0; }
+  }
+
+  /* 更新の反映は、利用者が押したときだけ */
+  let wantReload=false;
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(reloading) return; reloading=true; location.reload();
+    if(wantReload){ wantReload=false; location.reload(); }
+    else check();
   });
 
-  addEventListener("load",()=>{
-    navigator.serviceWorker.register("./sw.js").then(reg=>{
-      const offer=worker=>{
-        if(!worker) return;
-        bar.classList.add("on");
-        document.getElementById("upd-go").onclick=()=>{
-          bar.classList.remove("on");
-          worker.postMessage("skip-waiting");
-        };
+  navigator.serviceWorker.register("./sw.js").then(async reg=>{
+    const offer=w=>{
+      if(!w) return;
+      bar.classList.add("on");
+      document.getElementById("upd-go").onclick=()=>{
+        bar.classList.remove("on"); wantReload=true; w.postMessage("skip-waiting");
       };
-      if(reg.waiting&&navigator.serviceWorker.controller) offer(reg.waiting);
-      reg.addEventListener("updatefound",()=>{
-        const nw=reg.installing;
-        if(!nw) return;
-        nw.addEventListener("statechange",()=>{
-          if(nw.state==="installed"&&navigator.serviceWorker.controller) offer(nw);
-        });
+    };
+    if(reg.waiting&&navigator.serviceWorker.controller) offer(reg.waiting);
+    reg.addEventListener("updatefound",()=>{
+      const nw=reg.installing;
+      if(!nw) return;
+      nw.addEventListener("statechange",()=>{
+        if(nw.state==="installed"&&navigator.serviceWorker.controller) offer(nw);
+        if(nw.state==="activated") check();
       });
-    }).catch(()=>{});
+    });
+
+    await navigator.serviceWorker.ready;
+    check();
+    [1200,4000,9000].forEach(ms=>setTimeout(check,ms));
+  }).catch(err=>{
+    say("off","登録に失敗："+(err&&err.message?err.message:"原因不明"));
   });
+
+  redo.addEventListener("click",async()=>{
+    say("busy","保存し直しています…");
+    const reg=await navigator.serviceWorker.getRegistration();
+    if(reg&&reg.active) reg.active.postMessage("recache");
+    setTimeout(check,1500); setTimeout(check,4000);
+  });
+
+  check();
 })();
 </script>
 </body>
