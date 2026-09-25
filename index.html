@@ -9,8 +9,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="観る地図">
 <link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="./icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="./icon-180.png">
-<link rel="icon" href="./icon-192.png" type="image/png">
 <title>マーベル全作品、ぜんぶ観るための地図。</title>
 <style>
 :root{
@@ -1623,7 +1624,7 @@ if(matchMedia("(max-width:760px)").matches){
       const c=await caches.open(names[names.length-1]);
       const n=(await c.keys()).length;
       /* SHELL は sw.js の保存対象の数。ファイルを増減したらここも合わせる */
-      const SHELL=7;
+      const SHELL=8;
       if(n>=SHELL){ say("ready","オフライン準備完了・"+n+"件保存済み"); redo.hidden=false; }
       else say("busy","保存中… "+n+"/"+SHELL);
       return n;
