@@ -6,7 +6,7 @@
    ・アイコンなどはキャッシュ優先。
    ・ファイル構成を変えたときだけ VERSION を上げてください。
    ══════════════════════════════════════════════════════════ */
-const VERSION = "v5";
+const VERSION = "v6";
 const CACHE   = "marvel-watch-log-" + VERSION;
 
 const SHELL = [
